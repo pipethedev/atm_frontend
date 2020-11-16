@@ -1,0 +1,136 @@
+.fancybox-share__input {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 10px 15px;
+    background: 0 0;
+    color: #5d5b5b;
+    font-size: 14px;
+    outline: 0;
+    border: 0;
+    border-bottom: 2px solid #d7d7d7;
+}
+
+.fancybox-share__input {
+    box-sizing: border-box;
+    width: 100%;
+    margin: 10px 0 0;
+    padding: 10px 15px;
+    background: transparent;
+    color: #5d5b5b;
+    font-size: 14px;
+    outline: none;
+    border: 0;
+    border-bottom: 2px solid #d7d7d7;
+}
+
+input {
+    display: block;
+    margin-top: 0.5rem;
+}
+
+button,
+input {
+    overflow: visible;
+}
+
+.coverage h1 {
+    color: #222;
+    margin: 0 0 20px;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.fancybox-close-small {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: 0 0;
+    z-index: 10;
+    cursor: pointer;
+    text-decoration: none;
+    outline: 0 !important;
+    -webkit-appearance: button;
+}
+
+.fancybox-close-small {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.profile {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #031042;
+}
+
+.img_profile {
+    width: 93px;
+    height: 93px;
+    border-radius: 50%;
+}
+
+.info h3 {
+    font-family: "Product Sans", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: center;
+    color: #031042;
+}
+
+.info span,
+p {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    line-height: 15px;
+    text-align: center;
+    color: #708090;
+}
+
+.list-inline>li {
+    vertical-align: middle;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 14px;
+}
+
+.item {
+    border: none;
+}
+
+li img {
+    margin-left: -8%;
+}
+
+li span {
+    font-family: "Product Sans", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+    color: #708090;
+}

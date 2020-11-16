@@ -1,0 +1,267 @@
+/* @import url('https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css'); */
+
+html,
+body {
+    height: 100%;
+}
+
+p {
+    color: #031042;
+    font-weight: 400;
+    font-family: "Product Sans", sans-serif;
+}
+
+.cancel {
+    font-family: "Product Sans", sans-serif;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 400;
+    color: #031042;
+}
+
+.play_button {
+    background: #0727a6;
+    width: 230px;
+    height: 40px;
+    border-radius: 15px;
+    color: white;
+}
+
+.play_button span {
+    font-family: "Product Sans", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: #cdd4ed;
+}
+
+.play_card {
+    background: #deecf3;
+    height: auto;
+    padding-bottom: 10px;
+    border-radius: 20px;
+}
+
+.circle-option {
+    background-color: #97b0f6;
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+}
+
+.circle-option p {
+    color: #020f60;
+    padding-top: 11px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.number-box {
+    background-color: #deecf3;
+    height: auto;
+    border-radius: 20px;
+    z-index: 9999;
+    font-family: "Product Sans", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.number_card {
+    height: auto;
+    border-radius: 20px;
+    border: 0.5px solid #9daebc;
+    font-family: "Product Sans", sans-serif;
+}
+
+.header_dark {
+    font-family: "Product Sans", sans-serif;
+    background-color: #050c25;
+    color: white;
+}
+
+.header {
+    border: none;
+}
+
+.header_dark tr th {
+    font-size: 13px;
+    text-transform: capitalize;
+    color: #96a6b6;
+    font-weight: normal;
+}
+
+.card_wallet .cash {
+    font-family: "Product Sans", sans-serif;
+    font-weight: 400;
+    font-size: 32px;
+}
+
+.card_wallet .video-btn {
+    background-color: #cdd4ed;
+    width: 241px;
+    height: 40px;
+    border-radius: 15px;
+    opacity: 0.65;
+}
+
+.card_wallet .fund-button {
+    border-radius: 20px;
+    height: 22px;
+    width: 136px;
+    font-size: 12px;
+}
+
+#product-sans {
+    font-size: 12px;
+}
+
+.count_down {
+    font-family: "Product Sans", sans-serif;
+}
+
+.count_down p {
+    color: #9daebc;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.count_down .timer {
+    font-size: 32px;
+    line-height: 39px;
+}
+
+.count_down .count_text {
+    margin-bottom: 5.5px;
+}
+
+.color-card {
+    font-family: "Product Sans", sans-serif;
+    background: #deecf3;
+    height: auto;
+    padding-bottom: 23px;
+    border-radius: 20px;
+}
+
+.color-card center p {
+    color: #031042;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+}
+
+.red,
+.green,
+.blue {
+    height: 92px;
+    width: 92px;
+    border-radius: 50%;
+    font-family: Product Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.green {
+    background-color: #4cda64;
+}
+
+.bg_text {
+    text-align: center;
+    padding-top: 33px;
+    color: #020f60;
+    font-size: 16px;
+}
+
+.blue {
+    background: #3858c9;
+}
+
+.player-record {
+    background: #f0f0f0;
+    height: auto;
+}
+
+td {
+    font-size: 14px;
+    color: #031042;
+    font-family: "Product Sans", sans-serif;
+}
+
+@media screen and (max-width: 990px) {
+    .profile_lg {
+        display: none;
+    }
+    .player_record {
+        margin-top: 13%;
+    }
+}
+
+
+/* On screens that are 400px or less, set the background color to blue */
+
+@media screen and (max-width: 400px) {
+    .row_body {
+        margin-left: -6%;
+    }
+    .bg_text {
+        text-align: center;
+        padding-top: 29px;
+    }
+    .red,
+    .green,
+    .blue {
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
+        font-family: Product Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 19px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .red,
+    .green,
+    .blue {
+        height: 154px;
+        width: 154px;
+        border-radius: 50%;
+        font-family: Product Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 19px;
+    }
+    .bal {
+        padding-top: 20px;
+    }
+    .bg_text {
+        text-align: center;
+        padding-top: 61px;
+        color: #020f60;
+        font-size: 24px;
+        line-height: 29px;
+    }
+    .profile_sm {
+        display: none;
+    }
+}
+
+.slide-fade-enter-active {
+    transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter,
+.slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+}
