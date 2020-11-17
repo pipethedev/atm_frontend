@@ -43,7 +43,11 @@
         <div class="navbar-nav-wrap-content-right">
           <!-- Navbar -->
           <ul class="navbar-nav align-items-center flex-row">
-            <li class="nav-item d-none d-sm-inline-block" @click="toggle()">
+            <li
+              class="nav-item d-none d-sm-inline-block"
+              v-click-outside="hide"
+              @click="toggle()"
+            >
               <!-- Notification -->
               <div class="hs-unfold">
                 <a
@@ -60,8 +64,8 @@
 
             <li class="nav-item d-none d-sm-inline-block">
               <!-- Notification -->
-              <slide-y-up-transition v-if="show">
-                <Notification  />
+              <slide-y-up-transition v-show="show">
+                <Notification />
               </slide-y-up-transition>
 
               <!-- End Notification -->
@@ -72,7 +76,7 @@
               <div class="hs-unfold">
                 <router-link
                   class="js-hs-unfold-invoker navbar-dropdown-account-wrapper"
-                  :to="{path : '/profile'}"
+                  :to="{ path: '/profile' }"
                 >
                   <div class="avatar avatar-sm avatar-circle">
                     <img
@@ -203,7 +207,7 @@
                     </div>
                   </a>
 
-                  <div class="dropdown-divider"></div> 
+                  <div class="dropdown-divider"></div>
                 </div>
               </div>
               <!-- End Account -->
@@ -220,6 +224,7 @@
 <script>
 import Notification from "@/components/Notification.vue";
 import { SlideYUpTransition } from "vue2-transitions";
+import ClickOutside from 'vue-click-outside'
 export default {
   name: "AdminHeader",
   data() {
@@ -231,10 +236,22 @@ export default {
     Notification,
     SlideYUpTransition,
   },
-  methods : {
-    toggle(){
+  methods: {
+    toggle() {
       this.show = !this.show;
-    }
-  }
+    },
+    hide() {
+      this.show = false;
+    },
+  },
+  mounted() {
+    // prevent click outside event with popupItem.
+    this.popupItem = this.$el;
+  },
+
+  // do not forget this section
+  directives: {
+    ClickOutside,
+  },
 };
 </script>

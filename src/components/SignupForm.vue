@@ -99,6 +99,8 @@
     </div>
     <!-- End Form Group -->
 
+
+
     <!-- Form Group -->
     <div class="js-form-message form-group">
       <label class="input-label" for="signupSrConfirmPassword"
@@ -193,11 +195,12 @@ export default {
     return {
       name: "",
       account_number: "",
-      bank_code: "",
+      bank_code: "044",
       email: "",
       phonenumber: "",
       password: "",
       banks: "",
+      code : "",
       color: "#fff",
       seen: false,
       passwordFieldType: "password",
@@ -268,6 +271,7 @@ export default {
             phone_number: this.phonenumber,
             account_number: this.account_number,
             bank_code: this.bank_code,
+            referral_code : this.$route.query.ref
           },
           {
             headers: {

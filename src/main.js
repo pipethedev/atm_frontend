@@ -8,6 +8,7 @@ import Meta from "vue-meta"
 import VModal from 'vue-js-modal'
 import Vuelidate from 'vuelidate'
 import Flutterwave from 'flutterwave-vue-v3'
+var VueCookie = require('vue-cookie');
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faLinkedin, faPinterest } from '@fortawesome/free-brands-svg-icons'
@@ -38,6 +39,7 @@ Vue.use(Flutterwave, { publicKey: 'FLWPUBK_TEST-5e58c9813f97c3832330bfd406ca5300
 Vue.use(require('vue-moment'));
 Vue.use(NProgress, options)
 Vue.use(Transitions)
+Vue.use(VueCookie)
 Vue.use(Vuelidate)
 Vue.use(VueSweetalert2)
 Vue.use(VueToast)

@@ -3,7 +3,6 @@
     <loading
       :active.sync="isLoading"
       :can-cancel="false"
-      :on-cancel="onCancel"
       :is-full-page="fullPage"
     ></loading>
     <div class="container pb-7" style="background: #031042">
@@ -49,7 +48,7 @@
           <span class="mx-3 my-4">Bet History</span>
         </li>
         <li class="list-group-item item">
-          <router-link :to="{path : '/withdraw'}">
+          <router-link :to="{ path: '/withdraw' }">
             <img src="../assets/img/exit.svg" class="text-info mx-1" style="" />
             <span class="mx-3">Withdraw Funds</span>
           </router-link>
@@ -64,7 +63,7 @@
         </li>
         <li class="list-group-item item" @click.prevent="showAlert">
           <img src="../assets/img/logout.svg" class="text-info mx-1" style="" />
-          <span class="mx-3">Logout</span>
+          <span class="mx-4">Logout</span>
         </li>
       </ul>
     </div>
@@ -112,7 +111,7 @@
               <div class="container">
                 <div class="row pt-2 pb-8">
                   <a
-                    href="javascript:void(window.open('https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.location) + '?t=' + encodeURIComponent(document.title),'_blank'))"
+                    href="javascript:void(window.open('https://www.facebook.com/sharer.php?u=' + encodeURIComponent(`http://localhost:8080/register?ref=${this.user._id}`) + '?t=' + encodeURIComponent(document.title),'_blank'))"
                     class="col"
                   >
                     <font-awesome-icon
@@ -123,7 +122,7 @@
                     />
                   </a>
                   <a
-                    href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent(document.location) + '&text=' + encodeURIComponent(document.title) + '_blank'))"
+                    href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent(`http://localhost:8080/register?ref=${this.user._id}`) + '&text=' + encodeURIComponent(document.title) + '_blank'))"
                     class="col"
                   >
                     <font-awesome-icon
@@ -134,7 +133,7 @@
                     />
                   </a>
                   <a
-                    href="javascript:void(window.open('https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(document.location) + '&title=' + encodeURIComponent(document.title),'_blank'))"
+                    href="javascript:void(window.open('https://www.linkedin.com/shareArticle?url=' + encodeURIComponent(`http://localhost:8080/register?ref=${this.user._id}`) + '&title=' + encodeURIComponent(document.title),'_blank'))"
                     class="col"
                   >
                     <font-awesome-icon
@@ -145,7 +144,7 @@
                     />
                   </a>
                   <a
-                    href="javascript:void(window.open('https://pinterest.com/pin/create/bookmarklet/?url=' + encodeURIComponent(document.location) + '&description=' + encodeURIComponent(document.title),'_blank'))"
+                    href="javascript:void(window.open('https://pinterest.com/pin/create/bookmarklet/?url=' + encodeURIComponent(`http://localhost:8080/register?ref=${this.user._id}`) + '&description=' + encodeURIComponent(document.title),'_blank'))"
                     class="col"
                   >
                     <font-awesome-icon
@@ -162,7 +161,7 @@
               class="fancybox-share__input pb-1"
               type="text"
               style="margin-top: -5%"
-              value="https://christiansocials.olaniyiking.com/project?id=35&amp;status=Free&amp;product=AFRICA%20FASHION%20WEEK%20NIGERIA"
+              v-model="link"
             />
           </div>
         </div>
@@ -176,13 +175,19 @@ li {
 }
 </style>
 <script>
-// import axios from 'axios';
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { mapGetters, mapActions } from "vuex";
 export default {
+    computed: {
+    ...mapGetters({
+      authenticated: "auth/authenticated",
+      user: "auth/user",
+    }),
+  },
   data() {
     return {
+      link: ``,
       adaptive: true,
       draggable: true,
       opened: true,
@@ -191,10 +196,12 @@ export default {
       fullPage: true,
     };
   },
+  
   components: {
     Loading,
   },
   created() {
+    this.link = `http://localhost:8080/register?ref=${this.user._id}`
     console.log(this.user);
   },
   methods: {
@@ -244,12 +251,7 @@ export default {
       });
     },
   },
-  computed: {
-    ...mapGetters({
-      authenticated: "auth/authenticated",
-      user: "auth/user",
-    }),
-  },
+
 };
 </script>
 

@@ -11,13 +11,13 @@
                     </div>
                     <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
                         <div class="footer-menu">
-                            <ul>
+                            <!-- <ul>
                                 <li><a href="#">Home</a></li>
                                 <li><a href="#">Terms</a></li>
                                 <li><a href="#">Privacy</a></li>
                                 <li><a href="#">Policy</a></li>
                                 <li><a href="#">Contact</a></li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>

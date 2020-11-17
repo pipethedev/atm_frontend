@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pb-5">
     <div class="vld-parent">
       <loading
         :active.sync="isLoading"
@@ -9,14 +9,14 @@
       ></loading>
     </div>
     <div class="container mt-3">
-
       <div align="right" class="profile_lg pb-4">
         <img
           src="../assets/img/bell_dark.svg"
           height="27"
           width="27"
           class="mr-3"
-           @click="toggle()"
+          v-click-outside="hide"
+          @click="toggle"
         />
         <router-link :to="{ path: '/profile' }">
           <img
@@ -27,9 +27,9 @@
             class="rounded-circle mr-3"
           />
         </router-link>
-              <slide-y-up-transition v-if="avail">
-        <Notification />
-      </slide-y-up-transition>
+        <slide-y-up-transition v-show="avail">
+          <Notification />
+        </slide-y-up-transition>
       </div>
       <div class="row">
         <div class="col-lg-7">
@@ -63,7 +63,7 @@
                         <circle cx="7.5" cy="7.5" r="7.5" :fill="data" /></svg
                       ><span
                         class="ml-2"
-                        style="color: #020F60; font-weight: 600"
+                        style="color: #020f60; font-weight: 600"
                         >{{ data }}</span
                       >
                     </p>
@@ -127,7 +127,7 @@
           <slide-x-right-transition :duration="1500" v-if="final == false">
             <div
               class="number_card mt-2"
-              style="background: #E9F8FF"
+              style="background: #e9f8ff"
               v-show="show"
             >
               <div
@@ -154,7 +154,7 @@
                         <circle cx="7.5" cy="7.5" r="7.5" :fill="data" /></svg
                       ><span
                         class="ml-2"
-                        style="color: #020F60; font-weight: 600"
+                        style="color: #020f60; font-weight: 600"
                         >{{ data }}</span
                       >
                     </p>
@@ -165,7 +165,7 @@
                 class="number_box"
                 align="center"
                 style="
-                  background: #DEECF3;
+                  background: #deecf3;
                   border-radius: 20px;
                   padding-bottom: 54px;
                 "
@@ -177,54 +177,94 @@
                 </div>
                 <div class="row container" align="center">
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(0)">
+                    <div
+                      class="circle-option"
+                      :class="num == 0 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(0)"
+                    >
                       <p class="text-center">0</p>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(1)">
+                    <div
+                      class="circle-option"
+                      :class="num == 1 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(1)"
+                    >
                       <p class="text-center">1</p>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(2)">
+                    <div
+                      class="circle-option"
+                      :class="num == 2 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(2)"
+                    >
                       <p class="text-center">2</p>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(3)">
+                    <div
+                      class="circle-option"
+                      :class="num == 3 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(3)"
+                    >
                       <p class="text-center">3</p>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(4)">
+                    <div
+                      class="circle-option"
+                      :class="num == 4 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(4)"
+                    >
                       <p class="text-center">4</p>
                     </div>
                   </div>
                 </div>
                 <div class="row container mt-2" align="center">
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(5)">
+                    <div
+                      class="circle-option"
+                      :class="num == 5 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(5)"
+                    >
                       <p class="text-center">5</p>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(6)">
+                    <div
+                      class="circle-option"
+                      :class="num == 6 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(6)"
+                    >
                       <p class="text-center">6</p>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(7)">
+                    <div
+                      class="circle-option"
+                      :class="num == 7 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(7)"
+                    >
                       <p class="text-center">7</p>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(8)">
+                    <div
+                      class="circle-option"
+                      :class="num == 8 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(8)"
+                    >
                       <p class="text-center">8</p>
                     </div>
                   </div>
                   <div class="col">
-                    <div class="circle-option" @click="registerDigit(9)">
+                    <div
+                      class="circle-option"
+                      :class="num == 9 ? 'activeClass' : 'is-outlined'"
+                      @click="registerDigit(9)"
+                    >
                       <p class="text-center">9</p>
                     </div>
                   </div>
@@ -293,7 +333,7 @@
                       Number
                       <span
                         style="
-                          color: #020F60;
+                          color: #020f60;
                           font-family: 'Product Sans', sans-serif;
                           font-weight: 700;
                         "
@@ -314,23 +354,24 @@
             </div>
           </slide-x-right-transition>
         </div>
-        <div
-          class="player_record col-lg-5"
-          style="background: #ebebeb; border-radius: 19px"
-        >
-          <History />
+        <div class="container col-lg-5">
+          <div
+            class="player_record pb-4"
+            style="background: #ebebeb; border-radius: 19px"
+          >
+            <History />
+          </div>
         </div>
       </div>
     </div>
-    <div class="div pt-4"></div>
   </div>
 </template>
-<style lang="css">
+<style lang="css" scoped>
 @import url("../assets/css/main.css");
 @font-face {
   font-family: "Product Sans";
   src: local("Product Sans"),
-    url(../assets/fonts/Product-Sans-Regular.ttf)format("truetype");
+    url(../assets/fonts/Product-Sans-Regular.ttf) format("truetype");
 }
 .card_active {
   position: relative;
@@ -343,28 +384,32 @@
 
 .selection {
   height: 80px;
-  background: #E9F8FF;
+  background: #e9f8ff;
   opacity: 0.5;
-  border: 0.5px solid #9DAEBC;
+  border: 0.5px solid #9daebc;
   box-sizing: border-box;
   border-radius: 20px 20px 0px 0px;
 }
 .selection-2 {
   height: 50px;
-  background: #E9F8FF;
+  background: #e9f8ff;
   opacity: 0.5;
-  border: 0.5px solid #9DAEBC;
+  border: 0.5px solid #9daebc;
   box-sizing: border-box;
   border-radius: 20px 20px 0px 0px;
 }
 .continue {
-  background: #0727A6;
+  background: #0727a6;
   border-radius: 15px;
   border: none;
   /* height: 40px; */
   font-family: "Product Sans", sans-serif;
   text-transform: capitalize;
   width: 111px;
+}
+.activeClass {
+  background: yellow;
+  border: 1px solid #784e0a;
 }
 .card_wallet {
   font-family: "Product Sans", sans-serif;
@@ -386,6 +431,7 @@ import { mapGetters } from "vuex";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { SlideXRightTransition } from "vue2-transitions";
+import ClickOutside from "vue-click-outside";
 import Notification from "@/components/Notification.vue";
 export default {
   name: "Main",
@@ -397,6 +443,7 @@ export default {
   },
   data() {
     return {
+      num: "",
       avail: false,
       show: false,
       final: false,
@@ -409,15 +456,21 @@ export default {
       cash: "",
       game: {
         colors: [],
-        amount: 100,
+        amount: this.$cookie.get("amountPlayed"),
         value: null,
         user_id: "",
       },
     };
   },
+  mounted() {
+    // prevent click outside event with popupItem.
+    this.popupItem = this.$el;
+  },
+  directives: {
+    ClickOutside,
+  },
   created() {
     this.game.user_id = this.user._id;
-    console.log(this.game.amount);
     this.fetchWallet();
   },
   components: {
@@ -429,15 +482,17 @@ export default {
     SlideXRightTransition,
   },
   methods: {
-        toggle(){
+    toggle() {
       this.avail = !this.avail;
+    },
+    hide() {
+      this.avail = false;
     },
     fetchWallet() {
       axios
         .get(`wallet/${this.user._id}`)
         .then((response) => {
           this.cash = response.data.value;
-          console.log(response.data);
         })
         .catch((error) => {
           console.log(error);
@@ -482,6 +537,7 @@ export default {
       this.final = true;
     },
     registerDigit(number) {
+      this.num = number;
       this.game.value = number;
       this.numberSelect = true;
     },
@@ -497,7 +553,7 @@ export default {
         axios
           .post("bet", {
             colors: this.game.colors,
-            amount: 100,
+            amount: this.$cookie.get("amountPlayed"),
             value: this.game.value,
             user_id: this.game.user_id,
           })

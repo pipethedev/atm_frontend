@@ -1,5 +1,10 @@
 <template>
-  <div style="background: #E5E5E5; height: 100%">
+  <div style="background: #e5e5e5; height: 100%">
+    <loading
+      :active.sync="isLoading"
+      :can-cancel="false"
+      :is-full-page="fullPage"
+    ></loading>
     <div class="container pb-7">
       <div class="header pt-3">
         <a href="/profile">
@@ -65,20 +70,25 @@
 import Wallet from "@/components/Wallet";
 import { mapGetters } from "vuex";
 import axios from "axios";
-
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
   name: "Withdraw",
   data() {
     return {
+      id: "",
       banks: "",
       amount: "",
       account_number: "",
       bank: "",
       value: "",
+      isLoading: false,
+      fullPage: true,
     };
   },
   components: {
     Wallet,
+    Loading,
   },
   computed: {
     ...mapGetters({
@@ -87,10 +97,10 @@ export default {
     }),
   },
   created() {
+    this.account_number = this.user.account_number;
+    this.bank = this.user.bank_code.toString();
     this.getBanks();
     this.fetchWallet();
-    this.account_number = this.user.account_number;
-    this.bank = this.user.bank_code;
   },
   methods: {
     getBanks() {
@@ -114,6 +124,7 @@ export default {
         });
     },
     withDrawal() {
+      this.isLoading = true;console.log(`wallet/withdraw/${this.user._id}`);
       if (this.value >= this.amount) {
         axios
           .put(`wallet/withdraw/${this.user._id}`, {
@@ -122,17 +133,19 @@ export default {
             bank_code: this.bank,
           })
           .then((response) => {
-            console.log(response);
+            this.isLoading = false;
             if (response.data.json.status == "success") {
-              this.$toast.success(
-                `A sum of ${this.amount} has been credited to your account`,
-                {
-                  position: "top",
-                }
-              );
+              setTimeout(() => {
+                this.$toast.success(
+                  `A sum of ${this.amount} has been credited to your account`,
+                  {
+                    position: "top",
+                  }
+                );
+              },2000);
               setTimeout(() => {
                 location.reload();
-              }, 3000);
+              }, 4000);
             } else {
               this.$toast.error(`Invalid account details`, {
                 position: "top",
@@ -157,7 +170,7 @@ export default {
 
 <style lang="scss" scoped>
 .bg-darkBlue {
-  background: #0727A6;
+  background: #0727a6;
   border-radius: 15px;
   width: 241px;
   height: 50px;
@@ -171,7 +184,7 @@ select {
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  color: #CDD4ED;
+  color: #cdd4ed;
 }
 .profile {
   font-family: "Product Sans", sans-serif;
@@ -181,7 +194,7 @@ select {
   color: #031042;
 }
 .bg-lightGray {
-  background: #CDD4ED;
+  background: #cdd4ed;
 }
 label {
   font-family: "Product Sans", sans-serif;

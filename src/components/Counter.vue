@@ -4,7 +4,6 @@
       <loading
         :active.sync="isLoading"
         :can-cancel="false"
-        :on-cancel="onCancel"
         :is-full-page="fullPage"
       ></loading>
     </div>
@@ -104,7 +103,7 @@ export default {
         day.getMonth(),
         day.getDate(),
         day.getHours(),
-        parseInt(day.getMinutes() + 2.4),
+        parseInt(day.getMinutes() + 3.8),
         0,
         0
       );
