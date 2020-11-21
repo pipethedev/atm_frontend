@@ -21,7 +21,7 @@ import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 require('@/store/subscriber')
 
-axios.defaults.baseURL = 'http://localhost:5000/api/'
+axios.defaults.baseURL = 'https://allthingsmore.herokuapp.com/'
 
 Vue.config.productionTip = false
 
