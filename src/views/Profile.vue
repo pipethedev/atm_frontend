@@ -40,12 +40,14 @@
     <div class="option_list container mt-lg-10 mt-md-6">
       <ul class="list-group border-0" style="margin-top: -12%">
         <li class="list-group-item item pt-5">
-          <img
-            src="../assets/img/bet_history.svg"
-            class="text-info mx-1"
-            style=""
-          />
-          <span class="mx-3 my-4">Bet History</span>
+          <router-link :to="{ path: '/game_history' }">
+            <img
+              src="../assets/img/bet_history.svg"
+              class="text-info mx-1"
+              style=""
+            />
+            <span class="mx-3 my-4">Bet History</span>
+          </router-link>
         </li>
         <li class="list-group-item item">
           <router-link :to="{ path: '/withdraw' }">
@@ -179,7 +181,7 @@ import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { mapGetters, mapActions } from "vuex";
 export default {
-    computed: {
+  computed: {
     ...mapGetters({
       authenticated: "auth/authenticated",
       user: "auth/user",
@@ -196,12 +198,12 @@ export default {
       fullPage: true,
     };
   },
-  
+
   components: {
     Loading,
   },
   created() {
-    this.link = `http://localhost:8080/register?ref=${this.user._id}`
+    this.link = `http://localhost:8080/register?ref=${this.user._id}`;
     console.log(this.user);
   },
   methods: {
@@ -251,7 +253,6 @@ export default {
       });
     },
   },
-
 };
 </script>
 

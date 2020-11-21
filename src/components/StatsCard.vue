@@ -45,10 +45,10 @@
 
           <div class="row align-items-center gx-2 mb-1">
             <div class="col-6">
-              <span class="card-title h2">NGN {{ user.wallet_value }}</span>
+              <span class="card-title h2">NGN {{ user.wallet_value + this.value }}</span>
             </div>
 
-            <div class="col-6">
+            <div class="col-6"> 
               <!-- Chart -->
               <div class="chartjs-custom" style="height: 3rem">
                 <div class="chartjs-size-monitor">
@@ -144,12 +144,14 @@ export default {
     return {
       users: "",
       item : '',
-      mode : ''
+      mode : '',
+      value : ''
     };
   },
   created() {
     this.getUsers();
     this.getColors();
+    this.fetchWallet();
   },
   computed: {
     ...mapGetters({
@@ -167,6 +169,16 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+        });
+    },
+    fetchWallet() {
+      axios
+        .get(`wallet/${this.user._id}`)
+        .then((response) => {
+          this.value = response.data.value;
+        })
+        .catch((error) => {
+          console.log(error);
         });
     },
     getColors() {

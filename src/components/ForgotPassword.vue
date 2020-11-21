@@ -22,7 +22,7 @@
       </div>
       <!-- End Form Group -->
 
-      <button class="btn btn-lg btn-block btn-dark">
+      <button class="btn btn-lg btn-block btn-dark" :disabled="isActive">
         <div align="center" v-if="seen">
           <fulfilling-bouncing-circle-spinner
             :animation-duration="4000"
@@ -47,6 +47,7 @@ export default {
     return {
       seen: false,
       email: "",
+      isActive : false
     };
   },
   validations: {
@@ -74,12 +75,16 @@ export default {
       this.$v.$touch();
       if (this.$v.$pendding || this.$v.$error) return;
       this.seen = true;
+      this.isActive = true;
       axios
         .post("user/forgot", {
           email: this.email,
         })
         .then((response) => {
+          console.log(response);
           if (response.status == 200) {
+            this.isActive = false;
+            this.seen = false;
             this.$toast.success(`${response.data.message}`, {
               position: "top",
             });
@@ -88,6 +93,8 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          this.isActive = false;
+          this.seen = false;
           this.$toast.error(`${this.email} not found`, {
             position: "top-right",
           });

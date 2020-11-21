@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="hs-unfold">
+    <div class="hs-unfold" style="z-index:999999;">
       <div
         id="notificationDropdown"
         class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu hs-unfold-content-initialized hs-unfold-css-animation animated"
@@ -123,7 +123,7 @@
                         {{ not.main }}
                       </p>
                     </div>
-                    <small class="col-auto text-muted text-cap">2hr</small>
+                    <small class="col-auto text-muted " style="font-size:12px;">{{not.createdAt | moment("from") }}</small>
                   </div>
                   <a class="stretched-link" href="#"></a>
                 </li>

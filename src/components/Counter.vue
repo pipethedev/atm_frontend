@@ -132,7 +132,7 @@ export default {
             this.isLoading = true;
           }, 3100);
           setTimeout(() => {
-            //this.doAjax();
+            this.doAjax();
           }, 5000);
           this.return;
         }

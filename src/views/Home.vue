@@ -11,7 +11,7 @@
             <div class="row justify-content-lg-between align-items-lg-center py-5">
                 <div class="col-lg-9 mb-4 text-center text-lg-left slide-bottom">
                     <h1 class="display-4 mb-4">Welcome to <strong title="All things more">A.T.M</strong></h1>
-                    <p class="lead w-85"><strong>Allthingsmore</strong> is an online betting platform used to earn money by color prediction.</p>
+                    <p class="lead w-85 text-md-center text_ma"><strong>Allthingsmore</strong> is an online betting platform used to earn money by color prediction.</p>
                     <router-link class="btn btn-outline-dark btn-block rounded-pill d-sm-inline-block w-auto mx-2 ml-sm-0 my-3" v-bind:to = "{path:'/login'}" >
                         <font-awesome-icon icon="play" class="mr-1"/>
                         <span>Play Now</span>
@@ -56,4 +56,9 @@ export default {
 @import url('https://boost.11bits.es/assets/css/all.min.css');
 @import url('https://boost.11bits.es/assets/css/theme.css');
 @import url('../assets/css/animation.css');
+@media only screen and (max-width: 600px) {
+  .text-ma {
+    text-align: center;
+  }
+}
 </style>

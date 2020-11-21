@@ -10,7 +10,7 @@ import Vuelidate from 'vuelidate'
 import Flutterwave from 'flutterwave-vue-v3'
 var VueCookie = require('vue-cookie');
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen, faTimes } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faLinkedin, faPinterest } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueToast from 'vue-toast-notification';
@@ -19,14 +19,13 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import 'vue-js-modal/dist/styles.css'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-
 require('@/store/subscriber')
 
 axios.defaults.baseURL = 'http://localhost:5000/api/'
 
 Vue.config.productionTip = false
 
-library.add(faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen, faFacebook, faTwitter, faLinkedin, faPinterest)
+library.add(faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen, faFacebook, faTwitter, faLinkedin, faPinterest, faTimes)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 const options = {

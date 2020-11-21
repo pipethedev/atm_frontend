@@ -4,7 +4,6 @@
       <loading
         :active.sync="isLoading"
         :can-cancel="true"
-        :on-cancel="onCancel"
         :is-full-page="fullPage"
       ></loading>
     </div>
@@ -15,9 +14,11 @@
           height="27"
           width="27"
           class="mr-3"
-          v-click-outside="hide"
-          @click="toggle"
+          v-click-outside="hideModal"
+          v-show="!check"
+          @click="toggleOpen"
         />
+        <font-awesome-icon icon="times" class="mr-4" size="lg" v-show="check" @click="toggleOpen"/>
         <router-link :to="{ path: '/profile' }">
           <img
             src="https://randomuser.me/api/portraits/women/44.jpg"
@@ -27,13 +28,13 @@
             class="rounded-circle mr-3"
           />
         </router-link>
-        <slide-y-up-transition v-show="avail">
+        <slide-y-up-transition v-show="check">
           <Notification />
         </slide-y-up-transition>
       </div>
       <div class="row">
         <div class="col-lg-7">
-          <Wallet />
+          <Wallet :admin="check" />
           <div class="count_down mt-6">
             <Counter />
           </div>
@@ -337,7 +338,7 @@
                           font-family: 'Product Sans', sans-serif;
                           font-weight: 700;
                         "
-                        >2</span
+                        >{{ num }}</span
                       >
                     </p>
                   </div>
@@ -431,6 +432,7 @@ import { mapGetters } from "vuex";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { SlideXRightTransition } from "vue2-transitions";
+import { SlideYUpTransition  } from "vue2-transitions";
 import ClickOutside from "vue-click-outside";
 import Notification from "@/components/Notification.vue";
 export default {
@@ -443,8 +445,8 @@ export default {
   },
   data() {
     return {
+      check: false,
       num: "",
-      avail: false,
       show: false,
       final: false,
       isLoading: false,
@@ -462,15 +464,11 @@ export default {
       },
     };
   },
-  mounted() {
-    // prevent click outside event with popupItem.
-    this.popupItem = this.$el;
-  },
-  directives: {
-    ClickOutside,
-  },
   created() {
     this.game.user_id = this.user._id;
+    if (this.user.admin) {
+      this.check = true;
+    }
     this.fetchWallet();
   },
   components: {
@@ -480,19 +478,21 @@ export default {
     Loading,
     Notification,
     SlideXRightTransition,
+    SlideYUpTransition
   },
   methods: {
-    toggle() {
-      this.avail = !this.avail;
+    toggleOpen() {
+      this.check = !this.check;
     },
-    hide() {
-      this.avail = false;
+    hideModal() {
+      this.check = false;
     },
     fetchWallet() {
       axios
         .get(`wallet/${this.user._id}`)
         .then((response) => {
           this.cash = response.data.value;
+          this.game.amount = response.data.debitable;
         })
         .catch((error) => {
           console.log(error);
@@ -553,7 +553,7 @@ export default {
         axios
           .post("bet", {
             colors: this.game.colors,
-            amount: this.$cookie.get("amountPlayed"),
+            amount: this.game.amount,
             value: this.game.value,
             user_id: this.game.user_id,
           })
@@ -571,6 +571,12 @@ export default {
           });
       }
     },
+  },
+  mounted() {
+    this.popupItem = this.$el;
+  },
+  directives: {
+    ClickOutside,
   },
   metaInfo() {
     return {

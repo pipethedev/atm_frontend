@@ -155,7 +155,7 @@
     </div>
     <!-- End Checkbox -->
 
-    <button class="btn btn-lg btn-block btn-dark mb-2">
+    <button :disabled="isActive" class="btn btn-lg btn-block btn-dark mb-2">
       <div align="center" v-if="seen">
         <fulfilling-bouncing-circle-spinner
           :animation-duration="4000"
@@ -204,6 +204,7 @@ export default {
       color: "#fff",
       seen: false,
       passwordFieldType: "password",
+      isActive : false
     };
   },
   validations: {
@@ -260,6 +261,7 @@ export default {
       this.$v.$touch();
       if (this.$v.$pendding || this.$v.$error) return;
       this.seen = true;
+      this.isActive = true;
       axios
         .post(
           "user/register",
@@ -297,6 +299,7 @@ export default {
         })
         .catch(() => {
           this.seen = false;
+          this.isActive = false;
           this.$toast.error(`User exists", ${this.email} already exists`, {
               position: 'top'
             });

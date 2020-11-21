@@ -1,5 +1,5 @@
 <template>
-  <div style="background: #e5e5e5; height: 100%">
+  <body style="background: #e5e5e5; height: 100%">
     <loading
       :active.sync="isLoading"
       :can-cancel="false"
@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="pt-4">
-        <Wallet :bal="false" />
+        <Wallet :bal="false" :admin="check"/>
       </div>
       <div class="pt-5">
         <form @submit.prevent="withDrawal">
@@ -63,7 +63,7 @@
         </form>
       </div>
     </div>
-  </div>
+  </body>
 </template>
 
 <script>
@@ -80,10 +80,11 @@ export default {
       banks: "",
       amount: "",
       account_number: "",
-      bank: "",
+      bank: "044",
       value: "",
       isLoading: false,
       fullPage: true,
+      check : false
     };
   },
   components: {
@@ -98,9 +99,13 @@ export default {
   },
   created() {
     this.account_number = this.user.account_number;
+    
     this.bank = this.user.bank_code.toString();
     this.getBanks();
     this.fetchWallet();
+    if(this.user.admin){
+      this.check = true;
+    }
   },
   methods: {
     getBanks() {
@@ -133,7 +138,7 @@ export default {
             bank_code: this.bank,
           })
           .then((response) => {
-            this.isLoading = false;
+            
             if (response.data.json.status == "success") {
               setTimeout(() => {
                 this.$toast.success(

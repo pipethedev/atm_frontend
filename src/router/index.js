@@ -71,6 +71,15 @@ const routes = [{
         }
     },
     {
+        path: '/game_history',
+        name: 'GameHistory',
+        component: () =>
+            import ("../views/GameHistory.vue"),
+        meta: {
+            showProgressBar: true
+        }
+    },
+    {
         path: '/home',
         name: 'Main',
         component: Main,

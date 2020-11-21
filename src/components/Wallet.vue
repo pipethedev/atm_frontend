@@ -26,9 +26,12 @@
       <center class="bal">
         <div>
           <p class="text-white" style="font-size: 16px">Wallet Balance</p>
-          <h3 class="text-white cash">N {{ value }}</h3>
+          <h3 v-if="admin" class="text-white cash">
+            N {{ value + user.wallet_value }}
+          </h3>
+          <h3 v-else class="text-white cash">N {{ value }}</h3>
           <p class="text-white" id="product-sans" @click="show">
-            N {{ this.$cookie.get("amountPlayed") }}
+            N {{ debitable }}
             <font-awesome-icon icon="pen" class="ml-2" size="lg" />
           </p>
           <div v-if="bal">
@@ -69,6 +72,7 @@
       name="money"
       @opened="opened"
       :height="250"
+      :width="400"
       :adaptive="adaptive"
       :draggable="draggable"
     >
@@ -79,13 +83,17 @@
             <input
               type="number"
               id="amount"
-              placeholder="200"
+              placeholder="Amount"
               v-model.trim="amount"
               class="form-control bg-lightGray border-0"
             />
           </div>
           <div class="form-group">
-            <button class="btn btn-block" style="background: #020F60">
+            <button
+              class="btn btn-block"
+              :disabled="isActive"
+              style="background: #020f60"
+            >
               <div align="center" v-if="seen">
                 <fulfilling-bouncing-circle-spinner
                   :animation-duration="4000"
@@ -107,7 +115,7 @@
 @font-face {
   font-family: "Product Sans";
   src: local("Product Sans"),
-    url(../assets/fonts/Product-Sans-Regular.ttf)format("truetype");
+    url(../assets/fonts/Product-Sans-Regular.ttf) format("truetype");
 }
 .card_active {
   position: relative;
@@ -119,10 +127,10 @@ span {
   font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  color: #CDD4ED;
+  color: #cdd4ed;
 }
 .bg-lightGray {
-  background: #CDD4ED;
+  background: #cdd4ed;
 }
 .back,
 .forward {
@@ -138,22 +146,22 @@ label {
 }
 .selection {
   height: 80px;
-  background: #E9F8FF;
+  background: #e9f8ff;
   opacity: 0.5;
-  border: 0.5px solid #9DAEBC;
+  border: 0.5px solid #9daebc;
   box-sizing: border-box;
   border-radius: 20px 20px 0px 0px;
 }
 .selection-2 {
   height: 50px;
-  background: #E9F8FF;
+  background: #e9f8ff;
   opacity: 0.5;
-  border: 0.5px solid #9DAEBC;
+  border: 0.5px solid #9daebc;
   box-sizing: border-box;
   border-radius: 20px 20px 0px 0px;
 }
 .continue {
-  background: #0727A6;
+  background: #0727a6;
   border-radius: 15px;
   border: none;
   /* height: 40px; */
@@ -163,7 +171,7 @@ label {
 }
 .activeClass {
   background: yellow;
-  border: 1px solid #784E0A;
+  border: 1px solid #784e0a;
 }
 .card_wallet {
   font-family: "Product Sans", sans-serif;
@@ -181,12 +189,17 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import ClickOutside from "vue-click-outside";
 import Notification from "@/components/Notification.vue";
+import { SlideYUpTransition  } from "vue2-transitions";
 import { FulfillingBouncingCircleSpinner } from "epic-spinners";
 export default {
   props: {
     bal: {
       type: Boolean,
       default: true,
+    },
+    admin: {
+      type: Boolean,
+      default: false,
     },
   },
   name: "Wallet",
@@ -196,6 +209,8 @@ export default {
       seen: false,
       value: 0,
       amount: "",
+      debitable: "",
+      isActive: false,
       opened: false,
       adaptive: true,
       draggable: true,
@@ -213,12 +228,11 @@ export default {
   components: {
     FulfillingBouncingCircleSpinner,
     Notification,
+    SlideYUpTransition 
   },
   mounted() {
-    // prevent click outside event with popupItem.
     this.popupItem = this.$el;
   },
-  // do not forget this section
   directives: {
     ClickOutside,
   },
@@ -229,30 +243,8 @@ export default {
     remove() {
       this.avail = false;
     },
-    saveMoney() {
-      this.seen = true;
-      if (this.value >= this.amount) {
-        this.$cookie.set("amountPlayed", this.amount, 1825);
-        setTimeout(() => {
-          this.seen = false;
-          this.$toast.success(`Amount saved`, {
-            position: "top",
-          });
-        }, 1500);
-        setTimeout(() => {
-          this.$toast.success(`Amount saved`, {
-            position: "top",
-          });
-        }, 2500);
-      } else {
-        this.seen = false;
-        this.$toast.error(`Insufficient funds`, {
-          position: "top",
-        });
-      }
-    },
     show() {
-      this.$modal.show("money", { draggable: true });
+      this.$modal.show("money", { draggable: false });
     },
     hide() {
       this.$modal.hide("money");
@@ -262,10 +254,44 @@ export default {
         .get(`wallet/${this.user._id}`)
         .then((response) => {
           this.value = response.data.value;
+          this.debitable = response.data.debitable;
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    saveMoney() {
+      this.seen = true;
+      this.isActive = true;
+      if (this.value >= this.amount) {
+        axios
+          .put(`wallet/debit/${this.user._id}`, {
+            debitable: this.amount,
+          })
+          .then((response) => {
+            if (response.status == 200) {
+              this.isActive = false;
+              this.seen = false;
+              this.fetchWallet();
+              this.$toast.success(`Stake saved`, {
+                position: "top-right",
+              });
+            }
+          })
+          .catch((error) => {
+            this.isActive = false;
+            console.log(error);
+            this.$toast.error(`An internal error occurred`, {
+              position: "top-right",
+            });
+          });
+      } else {
+        this.seen = false;
+        this.isActive = false;
+        this.$toast.error(`Insufficient funds`, {
+          position: "top",
+        });
+      }
     },
     makePaymentCallback(response) {
       if (response.status === "successful") {
@@ -291,6 +317,7 @@ export default {
       }
     },
     closedPaymentModal() {
+      this.fetchWallet();
       console.log("closed");
     },
     generateReference() {

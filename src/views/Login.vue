@@ -4,9 +4,9 @@
     <!-- ========== HEADER ========== -->
     <header class="position-absolute top-0 left-0 right-0 mt-3 mx-3">
       <div class="d-flex d-lg-none justify-content-between">
-        <a href="index.html">
+        <router-link :to="{ path: '/register' }">
           <img class="w-100" src="../assets/main.svg" alt="Image Description" style="min-width: 7rem; max-width: 7rem;">
-        </a>
+        </router-link>
 
       </div>
     </header>

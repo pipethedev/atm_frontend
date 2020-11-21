@@ -53,7 +53,7 @@
                 </svg>
               </div>
             </th>
-            <th>{{ game.createdAt | moment("MMMM Do YYYY") }}</th>
+            <th>{{ game.createdAt | moment("from") }}</th>
           </tr>
         </tbody>
       </table>

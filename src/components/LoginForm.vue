@@ -41,8 +41,8 @@
 
         <div class="input-group input-group-merge">
           <input
-            type="password"
             v-model="password"
+            :type="passwordFieldType" 
             class="js-toggle-password form-control form-control-lg"
             placeholder="8+ characters required"
             :class="{ 'is-invalid': validationStatus($v.password) }"
@@ -51,13 +51,13 @@
             The password field is required
           </div>
           <div id="changePassTarget" class="input-group-append">
-            <a class="input-group-text" href="javascript:;">
-              <i id="changePassIcon" class="tio-visible-outlined"></i>
+            <a class="input-group-text" href="#" @click="switchVisibility">
+              <i id="changePassIcon" :class="[passwordSeen ? 'tio-visible-outlined' : 'tio-invisible']"></i>
             </a>
           </div>
         </div>
       </div>
-      <button class="btn btn-lg btn-block btn-dark">
+      <button class="btn btn-lg btn-block btn-dark" :disabled="isActive">
         <div align="center" v-if="seen">
           <fulfilling-bouncing-circle-spinner
             :animation-duration="4000"
@@ -80,8 +80,11 @@ export default {
   data() {
     return {
       seen: false,
+      passwordSeen :false,
       email : '',
-      password : ''
+      password : '',
+      isActive: false,
+      passwordFieldType: 'password'
     };
   },
   validations: {
@@ -96,6 +99,10 @@ export default {
     FulfillingBouncingCircleSpinner,
   },
   methods: {
+    switchVisibility() {
+      this.passwordSeen = !this.passwordSeen;
+      this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password'
+    },
     validationStatus(validation) {
       return typeof validation != "undefined" ? validation.$error : false;
     },
@@ -106,6 +113,7 @@ export default {
       this.$v.$touch();
       if (this.$v.$pendding || this.$v.$error) return;
       this.seen = true;
+      this.isActive = true;
       this.signIn({
         email : this.email,
         password : this.password
@@ -120,6 +128,7 @@ export default {
             },2000)
       }).catch(() => {
         this.seen = false;
+        this.isActive = false;
             this.$toast.error(`Invalid credentials`, {
               position: 'top'
             });
