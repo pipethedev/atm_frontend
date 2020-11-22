@@ -10,7 +10,7 @@ import Vuelidate from 'vuelidate'
 import Flutterwave from 'flutterwave-vue-v3'
 var VueCookie = require('vue-cookie');
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen, faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen, faTimes, faBars } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faTwitter, faLinkedin, faPinterest } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import VueToast from 'vue-toast-notification';
@@ -25,7 +25,7 @@ axios.defaults.baseURL = 'https://allthingsmore.herokuapp.com/'
 
 Vue.config.productionTip = false
 
-library.add(faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen, faFacebook, faTwitter, faLinkedin, faPinterest, faTimes)
+library.add(faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen, faFacebook, faTwitter, faLinkedin, faPinterest, faTimes, faBars)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 const options = {
