@@ -6,6 +6,7 @@ import axios from 'axios'
 import NProgress from 'vue-nprogress'
 import Meta from "vue-meta"
 import VModal from 'vue-js-modal'
+import VueAnalytics from 'vue-analytics'
 import Vuelidate from 'vuelidate'
 import Flutterwave from 'flutterwave-vue-v3'
 var VueCookie = require('vue-cookie');
@@ -33,7 +34,9 @@ const options = {
     router: true, // Show progressbar when navigating routes, default: true
     http: true // Show progressbar when doing Vue.http, default: true
 };
-
+Vue.use(VueAnalytics, {
+    id: 'G-PQZQWHQ7T1'
+})
 Vue.use(Flutterwave, { publicKey: 'FLWPUBK_TEST-5e58c9813f97c3832330bfd406ca5300-X' })
 Vue.use(require('vue-moment'));
 Vue.use(NProgress, options)

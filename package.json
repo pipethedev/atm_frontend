@@ -21,6 +21,7 @@
         "popper.js": "^1.16.1",
         "v-infinite-scroll": "^1.0.4",
         "vue": "^2.6.11",
+        "vue-analytics": "^5.22.1",
         "vue-click-outside": "^1.1.0",
         "vue-cookie": "^1.1.4",
         "vue-infinite-scroll": "^2.0.2",
