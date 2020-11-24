@@ -126,6 +126,8 @@
   </div>
 </template>
 <style scoped>
+/* @import url("https://htmlstream.com/front-dashboard/assets/css/vendor.min.css"); */
+@import url("https://snappyng.000webhostapp.com/theme.min.css");
 p,
 h1,
 h2,
@@ -145,7 +147,7 @@ h6 {
   width: 100%;
 }
 .bg-lightGray {
-  background: #CDD4ED;
+  background: #cdd4ed;
 }
 </style>
 <script>
@@ -179,7 +181,7 @@ export default {
   },
   components: {
     Navbar,
-    Loading
+    Loading,
   },
   methods: {
     updateProfile() {
@@ -202,8 +204,8 @@ export default {
               this.isLoading = false;
             }, 2500);
             setTimeout(() => {
-              window.location.reload()
-            },3500)
+              window.location.reload();
+            }, 3500);
           }
         })
         .catch((error) => {
@@ -226,6 +228,18 @@ export default {
       authenticated: "auth/authenticated",
       user: "auth/user",
     }),
+  },
+  metaInfo() {
+    return {
+      title: `${this.name} | A.T.M`,
+      meta: [
+        {
+          vmid: "",
+          name: "settings",
+          content: "Welcome to A.T.M, earn money by predictions",
+        },
+      ],
+    };
   },
 };
 </script>

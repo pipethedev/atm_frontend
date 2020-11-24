@@ -40,10 +40,10 @@
       aria-label="Main navigation"
     >
       <div class="container">
-        <router-link class="navbar-brand text-dark" :to="{path : '/home'}">
+        <a class="navbar-brand text-dark" href="/home">
           <!-- <img src="https://www.flaticon.com/svg/static/icons/svg/755/755195.svg" class="col-2" height="50"/> -->
           <h1>A.T.M</h1>
-        </router-link>
+        </a>
         <button
           class="navbar-toggler"
           type="button"
@@ -71,7 +71,10 @@
   </div>
 </template>
 <style lang="css" scoped>
-/* @import url("https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"); */
+
+/* @import url('https://boost.11bits.es/assets/css/all.min.css'); */
+/* @import url('https://boost.11bits.es/assets/css/theme.css'); */
+
 </style>
 <script>
 import { SlideYUpTransition } from "vue2-transitions";

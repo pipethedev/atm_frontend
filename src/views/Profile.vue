@@ -175,6 +175,10 @@
 li {
   cursor: pointer;
 }
+@import url("https://christiansocials.olaniyiking.com/css/bootstrap.min.css");
+@import url("https://christiansocials.olaniyiking.com/css/style.min.css");
+@import url("https://christiansocials.olaniyiking.com/css/responsive.min.css");
+@import url("../assets/css/second.css");
 </style>
 <script>
 import Loading from "vue-loading-overlay";
@@ -219,9 +223,10 @@ export default {
       });
     },
     moveEdit() {
-      this.$router.replace({
-        name: "Settings",
-      });
+      this.$router.push("edit");
+      // this.$router.push({
+      //   name: "Settings",
+      // });
     },
     ...mapActions({
       signOutAction: "auth/signOut",
@@ -257,12 +262,17 @@ export default {
       });
     },
   },
+  metaInfo() {
+    return {
+      title: `Profile | A.T.M`,
+      meta: [
+        {
+          vmid: "",
+          name: "settings",
+          content: "Welcome to A.T.M, earn money by predictions",
+        },
+      ],
+    };
+  },
 };
 </script>
-
-<style lang="css" scoped>
-@import url("https://christiansocials.olaniyiking.com/css/bootstrap.min.css");
-@import url("https://christiansocials.olaniyiking.com/css/style.min.css");
-@import url("https://christiansocials.olaniyiking.com/css/responsive.min.css");
-@import url("../assets/css/second.css");
-</style>
