@@ -76,7 +76,7 @@
                   <center class="pt-4"><p>Choose a color</p></center>
                   <div class="color_body pt-2" align="center">
                     <div class="row row_body">
-                      <div class="col">
+                      <div class="col" style="cursor:pointer;">
                         <div
                           class="red"
                           style="background: #d63031"
@@ -85,12 +85,12 @@
                           <p class="bg_text">Red</p>
                         </div>
                       </div>
-                      <div class="col">
+                      <div class="col" style="cursor:pointer;">
                         <div class="blue" @click="addColor('blue')">
                           <p class="bg_text">Blue</p>
                         </div>
                       </div>
-                      <div class="col">
+                      <div class="col" style="cursor:pointer;">
                         <div class="4 green" @click="addColor('green')">
                           <p class="bg_text">Green</p>
                         </div>
