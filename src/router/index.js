@@ -16,6 +16,14 @@ const routes = [{
         component: Home,
         meta: {
             showProgressBar: true
+        },
+        beforeEnter: (to, from, next) => {
+            if (store.getters['auth/authenticated']) {
+                return next({
+                    name: 'Main'
+                })
+            }
+            next()
         }
     },
     {
@@ -50,6 +58,14 @@ const routes = [{
             import ('../views/Withdraw.vue'),
         meta: {
             showProgressBar: true
+        },
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'Login'
+                })
+            }
+            next()
         }
     },
     {
@@ -68,6 +84,14 @@ const routes = [{
             import ("../views/Settings.vue"),
         meta: {
             showProgressBar: true
+        },
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'Login'
+                })
+            }
+            next()
         }
     },
     {
@@ -77,6 +101,14 @@ const routes = [{
             import ("../views/GameHistory.vue"),
         meta: {
             showProgressBar: true
+        },
+        beforeEnter: (to, from, next) => {
+            if (!store.getters['auth/authenticated']) {
+                return next({
+                    name: 'Login'
+                })
+            }
+            next()
         }
     },
     {
