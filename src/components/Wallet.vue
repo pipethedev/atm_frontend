@@ -301,7 +301,7 @@ export default {
             amount: response.amount,
             type: "credit",
           })
-          .then((response) => {
+          .then(() => {
             window.reload();
             this.$toast.success("Your wallet has been funded", {
               position: "top",
