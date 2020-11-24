@@ -219,14 +219,18 @@ export default {
       });
     },
     moveEdit() {
-      window.location.replace("http://localhost:8080/edit");
+      this.$router.replace({
+        name: "Settings",
+      });
     },
     ...mapActions({
       signOutAction: "auth/signOut",
     }),
     signOut() {
       this.signOutAction().then(() => {
-        window.location.replace("http://localhost:8080/login");
+        this.$router.replace({
+          name: "Login",
+        });
       });
     },
     withDraw() {
@@ -240,7 +244,7 @@ export default {
         showCancelButton: true,
         confirmButtonColor: "#031042",
         cancelButtonColor: "#fdcb6e",
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, log out!",
       }).then((result) => {
         if (result.isConfirmed) {
           this.$swal.fire(

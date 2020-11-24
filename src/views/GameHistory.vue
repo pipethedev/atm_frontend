@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <div class="header pt-3 pb-4">
+      <div class="header pt-3 pb-1">
         <a href="/profile">
           <div class="arrow_back float-left">
             <font-awesome-icon
@@ -19,8 +19,8 @@
       </div>
       <div class="player_record pb-4" style="border-radius: 19px">
         <div class="container">
-          <div>
-            <table class="table table-hover">
+          <div class="row">
+            <table class="table table-hover col-12">
               <thead class="header_dark">
                 <tr class="header">
                   <th scope="col">Result</th>
