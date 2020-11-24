@@ -302,8 +302,7 @@ export default {
             type: "credit",
           })
           .then((response) => {
-            console.log(response);
-            this.fetchWallet();
+            window.reload();
             this.$toast.success("Your wallet has been funded", {
               position: "top",
             });
@@ -317,7 +316,7 @@ export default {
       }
     },
     closedPaymentModal() {
-      this.fetchWallet();
+      window.reload();
       console.log("closed");
     },
     generateReference() {
