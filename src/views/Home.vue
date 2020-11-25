@@ -35,6 +35,11 @@ export default {
         MainFooter,
         Navbar
     },
+    methods : {
+        track(){
+            this.$ga.page('/');
+        }
+    },
     metaInfo() {
         return {
         title: "Welcome to A.T.M",

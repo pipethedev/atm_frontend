@@ -2,7 +2,6 @@
   <div
     class="footer-offset footer-offset has-navbar-vertical-aside navbar-vertical-aside-show-xl navbar-vertical-aside-closed-mode"
   >
-   
     <AdminHeader />
     <!-- <AdminSideBar/> -->
     <div
@@ -16,8 +15,8 @@
           <div class="row align-items-center">
             <div class="col-sm mb-2 mb-sm-0">
               <div class="page-header-title">
-                <router-link :to="{path : '/'}">
-                  <img src="../assets/main.svg" height="90">
+                <router-link :to="{ path: '/' }">
+                  <img src="../assets/main.svg" height="90" />
                 </router-link>
               </div>
             </div>
@@ -25,7 +24,7 @@
         </div>
         <StatsCard />
         <AdminTable />
-        <ModalCashout/>
+        <ModalCashout />
       </div>
       <!-- End Content -->
     </main>
@@ -41,7 +40,12 @@ export default {
     AdminHeader,
     StatsCard,
     AdminTable,
-    ModalCashout
+    ModalCashout,
+  },
+  methods: {
+    track() {
+      this.$ga.page("/admin");
+    },
   },
 };
 </script>

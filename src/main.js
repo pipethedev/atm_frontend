@@ -37,7 +37,8 @@ const options = {
     http: true // Show progressbar when doing Vue.http, default: true
 };
 Vue.use(VueAnalytics, {
-    id: 'G-PQZQWHQ7T1'
+    id: 'G-PQZQWHQ7T1',
+    checkDuplicatedScript: true
 })
 Vue.use(Flutterwave, { publicKey: 'FLWPUBK_TEST-5e58c9813f97c3832330bfd406ca5300-X' })
 Vue.use(require('vue-moment'));

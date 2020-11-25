@@ -76,8 +76,12 @@
                       </svg>
                     </div>
                   </th>
-                  <th class="text-danger" v-if="!game.type">- NGN {{ game.gain_lost }}</th>
-                  <th class="text-success" v-if="game.type">+ NGN {{ game.gain_lost }}</th>
+                  <th class="text-danger" v-if="!game.type">
+                    - NGN {{ game.gain_lost }}
+                  </th>
+                  <th class="text-success" v-if="game.type">
+                    + NGN {{ game.gain_lost }}
+                  </th>
                   <th>{{ game.createdAt | moment("from") }}</th>
                 </tr>
               </tbody>
@@ -108,6 +112,9 @@ export default {
     }),
   },
   methods: {
+    track() {
+      this.$ga.page("/history");
+    },
     getGames() {
       axios
         .get(`bet/user/${this.user._id}`)

@@ -18,7 +18,13 @@
           v-show="!check"
           @click="toggleOpen"
         />
-        <font-awesome-icon icon="times" class="mr-4" size="lg" v-show="check" @click="toggleOpen"/>
+        <font-awesome-icon
+          icon="times"
+          class="mr-4"
+          size="lg"
+          v-show="check"
+          @click="toggleOpen"
+        />
         <router-link :to="{ path: '/profile' }">
           <img
             src="https://randomuser.me/api/portraits/women/44.jpg"
@@ -76,7 +82,7 @@
                   <center class="pt-4"><p>Choose a color</p></center>
                   <div class="color_body pt-2" align="center">
                     <div class="row row_body">
-                      <div class="col" style="cursor:pointer;">
+                      <div class="col" style="cursor: pointer">
                         <div
                           class="red"
                           style="background: #d63031"
@@ -85,12 +91,12 @@
                           <p class="bg_text">Red</p>
                         </div>
                       </div>
-                      <div class="col" style="cursor:pointer;">
+                      <div class="col" style="cursor: pointer">
                         <div class="blue" @click="addColor('blue')">
                           <p class="bg_text">Blue</p>
                         </div>
                       </div>
-                      <div class="col" style="cursor:pointer;">
+                      <div class="col" style="cursor: pointer">
                         <div class="4 green" @click="addColor('green')">
                           <p class="bg_text">Green</p>
                         </div>
@@ -432,7 +438,7 @@ import { mapGetters } from "vuex";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 import { SlideXRightTransition } from "vue2-transitions";
-import { SlideYUpTransition  } from "vue2-transitions";
+import { SlideYUpTransition } from "vue2-transitions";
 import ClickOutside from "vue-click-outside";
 import Notification from "@/components/Notification.vue";
 export default {
@@ -478,9 +484,12 @@ export default {
     Loading,
     Notification,
     SlideXRightTransition,
-    SlideYUpTransition
+    SlideYUpTransition,
   },
   methods: {
+    track() {
+      this.$ga.page("/home");
+    },
     toggleOpen() {
       this.check = !this.check;
     },

@@ -184,6 +184,9 @@ export default {
     Loading,
   },
   methods: {
+    track() {
+     this.$ga.page('/edit');
+    },
     updateProfile() {
       axios
         .put(`users/${this.user._id}`, {

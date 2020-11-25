@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Main from '../views/Main.vue'
 import NProgress from 'vue-nprogress'
+import VueAnalytics from 'vue-analytics'
 import 'nprogress/nprogress.css';
 import store from '@/store'
 
@@ -188,9 +189,12 @@ router.beforeResolve((to, from, next) => {
     next()
 });
 
-// router.afterEach(() => {
-//   NProgress.done()
-// });
-
+Vue.use(VueAnalytics, {
+    id: 'G-PQZQWHQ7T1',
+    router,
+    autoTracking: {
+        pageviewOnLoad: false
+    }
+})
 
 export default router

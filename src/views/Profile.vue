@@ -261,6 +261,9 @@ export default {
         }
       });
     },
+    track() {
+      this.$ga.page("/profile");
+    },
   },
   metaInfo() {
     return {

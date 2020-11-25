@@ -28,8 +28,11 @@
             <div
               class="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100"
             >
-              <div class="w-100 pt-10 pt-lg-7 pb-7 password_box" style="max-width: 25rem;">
-                <ResetBox/>
+              <div
+                class="w-100 pt-10 pt-lg-7 pb-7 password_box"
+                style="max-width: 25rem"
+              >
+                <ResetBox />
               </div>
             </div>
           </div>
@@ -44,18 +47,23 @@
 <script>
 import LoginSideBar from "@/components/login-sidebar";
 import ResetBox from "@/components/ResetBox";
-  export default {
-    components : {
-      LoginSideBar,
-      ResetBox
-    }
-  }
+export default {
+  components: {
+    LoginSideBar,
+    ResetBox,
+  },
+  methods: {
+    track() {
+      this.$ga.page("/reset");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
 @media only screen and (max-width: 600px) {
   .password_box {
-    margin-top:23%;
+    margin-top: 23%;
   }
 }
 </style>

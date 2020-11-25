@@ -28,7 +28,10 @@
             <div
               class="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100"
             >
-              <div class="w-100 pt-10 pt-lg-7 pb-7 password_box" style="max-width: 25rem;">
+              <div
+                class="w-100 pt-10 pt-lg-7 pb-7 password_box"
+                style="max-width: 25rem"
+              >
                 <ForgotPassword />
               </div>
             </div>
@@ -43,11 +46,16 @@
 
 <script>
 import LoginSideBar from "@/components/login-sidebar";
-import ForgotPassword from '@/components/ForgotPassword'
+import ForgotPassword from "@/components/ForgotPassword";
 export default {
   components: {
     LoginSideBar,
-    ForgotPassword
+    ForgotPassword,
+  },
+  methods: {
+    track() {
+      this.$ga.page("/forgot");
+    },
   },
   metaInfo() {
     return {
@@ -68,7 +76,7 @@ export default {
 <style lang="scss" scoped>
 @media only screen and (max-width: 600px) {
   .password_box {
-    margin-top:23%;
+    margin-top: 23%;
   }
 }
 </style>

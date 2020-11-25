@@ -147,7 +147,7 @@ export default {
 
 <style lang="css" scoped>
 @import url("https://htmlstream.com/front-dashboard/assets/css/vendor.min.css");
-@import url("https://raw.githubusercontent.com/Fn-studyo/atm_frontend/main/src/assets/css/theme.min.css");
+@import url("https://snappyng.000webhostapp.com/theme.min.css");
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300&display=swap");
 body {
   font-family: "Product Sans", sans-serif;

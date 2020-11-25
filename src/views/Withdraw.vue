@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="pt-4">
-        <Wallet :bal="false" :admin="check"/>
+        <Wallet :bal="false" :admin="check" />
       </div>
       <div class="pt-5">
         <form @submit.prevent="withDrawal">
@@ -69,6 +69,7 @@
 <script>
 import Wallet from "@/components/Wallet";
 import { mapGetters } from "vuex";
+import { page } from 'vue-analytics'
 import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
@@ -84,7 +85,7 @@ export default {
       value: "",
       isLoading: false,
       fullPage: true,
-      check : false
+      check: false,
     };
   },
   components: {
@@ -99,15 +100,18 @@ export default {
   },
   created() {
     this.account_number = this.user.account_number;
-    
+
     this.bank = this.user.bank_code.toString();
     this.getBanks();
     this.fetchWallet();
-    if(this.user.admin){
+    if (this.user.admin) {
       this.check = true;
     }
   },
   methods: {
+    track() {
+      page("/");
+    },
     getBanks() {
       axios
         .get("https://api.paystack.co/bank")
@@ -129,7 +133,8 @@ export default {
         });
     },
     withDrawal() {
-      this.isLoading = true;console.log(`wallet/withdraw/${this.user._id}`);
+      this.isLoading = true;
+      console.log(`wallet/withdraw/${this.user._id}`);
       if (this.value >= this.amount) {
         axios
           .put(`wallet/withdraw/${this.user._id}`, {
@@ -138,7 +143,6 @@ export default {
             bank_code: this.bank,
           })
           .then((response) => {
-            
             if (response.data.json.status == "success") {
               setTimeout(() => {
                 this.$toast.success(
@@ -147,7 +151,7 @@ export default {
                     position: "top",
                   }
                 );
-              },2000);
+              }, 2000);
               setTimeout(() => {
                 location.reload();
               }, 4000);
