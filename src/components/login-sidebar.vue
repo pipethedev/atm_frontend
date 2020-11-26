@@ -48,7 +48,18 @@
       </div>
     </div>
 </template>
-
+<style lang="css" scoped>
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
+@import url("../assets/css/style.css");
+@import url("../assets/css/docs.css");
+@import url("../assets/css/vendor.min.css");
+@import url("https://snappyng.000webhostapp.com/theme.minc619.css");
+@media only screen and (max-width: 600px) {
+  .password_box {
+    margin-top: 23%;
+  }
+}
+</style>
 <script>
 export default {
   name: "LoginSideBar",

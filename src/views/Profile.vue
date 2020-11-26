@@ -223,7 +223,7 @@ export default {
       });
     },
     moveEdit() {
-      this.$router.push("edit");
+      this.$router.push("/edit");
       // this.$router.push({
       //   name: "Settings",
       // });
@@ -233,9 +233,7 @@ export default {
     }),
     signOut() {
       this.signOutAction().then(() => {
-        this.$router.replace({
-          name: "Login",
-        });
+        window.location.href = '/login';
       });
     },
     withDraw() {

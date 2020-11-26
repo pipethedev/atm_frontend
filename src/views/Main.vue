@@ -14,6 +14,7 @@
           height="27"
           width="27"
           class="mr-3"
+          style="cursor:pointer;"
           v-click-outside="hideModal"
           v-show="!check"
           @click="toggleOpen"
@@ -23,6 +24,7 @@
           class="mr-4"
           size="lg"
           v-show="check"
+          style="cursor:pointer;"
           @click="toggleOpen"
         />
         <router-link :to="{ path: '/profile' }">

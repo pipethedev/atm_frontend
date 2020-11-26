@@ -22,6 +22,62 @@
     <br />
   </div>
 </template>
+<style lang="css" scoped>
+@import url("../assets/css/main.css");
+@font-face {
+  font-family: "Product Sans";
+  src: local("Product Sans"),
+    url(../assets/fonts/Product-Sans-Regular.ttf) format("truetype");
+}
+.card_active {
+  position: relative;
+  top: -35px;
+}
+.back,
+.forward {
+  display: inline-block;
+}
+
+.selection {
+  height: 80px;
+  background: #e9f8ff;
+  opacity: 0.5;
+  border: 0.5px solid #9daebc;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0px 0px;
+}
+.selection-2 {
+  height: 50px;
+  background: #e9f8ff;
+  opacity: 0.5;
+  border: 0.5px solid #9daebc;
+  box-sizing: border-box;
+  border-radius: 20px 20px 0px 0px;
+}
+.continue {
+  background: #0727a6;
+  border-radius: 15px;
+  border: none;
+  /* height: 40px; */
+  font-family: "Product Sans", sans-serif;
+  text-transform: capitalize;
+  width: 111px;
+}
+.activeClass {
+  background: yellow;
+  border: 1px solid #784e0a;
+}
+.card_wallet {
+  font-family: "Product Sans", sans-serif;
+  background-color: #000;
+  height: 300px;
+  border-radius: 20px;
+  background-image: url("../assets/img/main_bg.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+</style>
 <script>
 // Import component
 import Loading from "vue-loading-overlay";
