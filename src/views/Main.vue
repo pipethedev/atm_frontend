@@ -464,7 +464,7 @@ export default {
       cash: "",
       game: {
         colors: [],
-        amount: this.$cookie.get("amountPlayed"),
+        amount: 0,
         value: null,
         user_id: "",
       },

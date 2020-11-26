@@ -24,6 +24,9 @@
         <Wallet :bal="false" :admin="check" />
       </div>
       <div class="pt-5">
+        <p v-if="games.length <= 4" class="text-center text-danger">
+          You can't withdraw until you have played 4 games.
+        </p>
         <form @submit.prevent="withDrawal">
           <div class="form-group">
             <label for="amount">How much will you like to withdraw ?</label>
@@ -56,7 +59,10 @@
             </select>
           </div>
           <div class="form-group mt-5" align="center">
-            <button class="btn btn-block text-white bg-darkBlue">
+            <button
+              class="btn btn-block text-white bg-darkBlue"
+              :disabled="disabled"
+            >
               <span class="text-capitalize">Send to bank</span>
             </button>
           </div>
@@ -69,7 +75,7 @@
 <script>
 import Wallet from "@/components/Wallet";
 import { mapGetters } from "vuex";
-import { page } from 'vue-analytics'
+import { page } from "vue-analytics";
 import axios from "axios";
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
@@ -83,9 +89,11 @@ export default {
       account_number: "",
       bank: "044",
       value: "",
+      games : [],
       isLoading: false,
       fullPage: true,
       check: false,
+      disabled: false,
     };
   },
   components: {
@@ -100,10 +108,10 @@ export default {
   },
   created() {
     this.account_number = this.user.account_number;
-
     this.bank = this.user.bank_code.toString();
     this.getBanks();
     this.fetchWallet();
+    this.getGames();
     if (this.user.admin) {
       this.check = true;
     }
@@ -129,6 +137,20 @@ export default {
           this.value = response.data.value;
         })
         .catch((error) => {
+          console.log(error);
+        });
+    },
+    getGames() {
+      axios
+        .get(`bet/user/${this.user._id}`)
+        .then((response) => {
+          this.games = response.data;
+          if(response.data.length <= 4){
+            this.disabled = true;
+          }
+        })
+        .catch((error) => {
+          // handle error
           console.log(error);
         });
     },

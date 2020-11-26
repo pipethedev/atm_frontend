@@ -69,7 +69,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap");
 @import url("../assets/css/style.css");
 @import url("../assets/css/docs.css");

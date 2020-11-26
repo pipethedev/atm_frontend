@@ -254,6 +254,7 @@ export default {
         .get(`wallet/${this.user._id}`)
         .then((response) => {
           this.value = response.data.value;
+          this.amount = response.data.debitable;
           this.debitable = response.data.debitable;
         })
         .catch((error) => {
