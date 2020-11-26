@@ -50,6 +50,21 @@
           </router-link>
         </li>
         <li class="list-group-item item">
+          <downloadexcel
+            :fetch="fetchData"
+            :fields="json_fields"
+            :before-generate="startDownload"
+            :before-finish="finishDownload"
+          >
+            <img
+              src="../assets/img/download.svg"
+              class="text-info mx-1"
+              style=""
+            />
+            <span class="mx-3 my-4">Download Transaction History</span>
+          </downloadexcel>
+        </li>
+        <li class="list-group-item item">
           <router-link :to="{ path: '/withdraw' }">
             <img src="../assets/img/exit.svg" class="text-info mx-1" style="" />
             <span class="mx-3">Withdraw Funds</span>
@@ -181,8 +196,10 @@ li {
 @import url("../assets/css/second.css");
 </style>
 <script>
+import axios from 'axios'
 import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
+import downloadexcel from "vue-json-excel";
 import { mapGetters, mapActions } from "vuex";
 export default {
   computed: {
@@ -200,17 +217,32 @@ export default {
       expired: false,
       isLoading: false,
       fullPage: true,
+      json_fields: {
+        id: "reference_id",
+        amount: "amount",
+        createdAt: "createdAt",
+      },
     };
   },
 
   components: {
     Loading,
+    downloadexcel,
   },
   created() {
     this.link = `http://localhost:8080/register?ref=${this.user._id}`;
-    console.log(this.user);
   },
   methods: {
+    async fetchData() {
+      const response = await axios.get(`transaction/${this.user._id}`);
+      return response.data;
+    },
+    startDownload() {
+      alert("show loading");
+    },
+    finishDownload() {
+      alert("hide loading");
+    },
     show() {
       this.$modal.show("modal-cashout", { draggable: true });
     },
@@ -224,16 +256,13 @@ export default {
     },
     moveEdit() {
       this.$router.push("/edit");
-      // this.$router.push({
-      //   name: "Settings",
-      // });
     },
     ...mapActions({
       signOutAction: "auth/signOut",
     }),
     signOut() {
       this.signOutAction().then(() => {
-        window.location.href = '/login';
+        window.location.href = "/login";
       });
     },
     withDraw() {

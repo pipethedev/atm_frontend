@@ -189,7 +189,7 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 import ClickOutside from "vue-click-outside";
 import Notification from "@/components/Notification.vue";
-import { SlideYUpTransition  } from "vue2-transitions";
+import { SlideYUpTransition } from "vue2-transitions";
 import { FulfillingBouncingCircleSpinner } from "epic-spinners";
 export default {
   props: {
@@ -228,7 +228,7 @@ export default {
   components: {
     FulfillingBouncingCircleSpinner,
     Notification,
-    SlideYUpTransition 
+    SlideYUpTransition,
   },
   mounted() {
     this.popupItem = this.$el;
@@ -296,6 +296,7 @@ export default {
     },
     makePaymentCallback(response) {
       if (response.status === "successful") {
+        //wallet table
         axios
           .put(`wallet/${this.user._id}`, {
             status: "Approved",
@@ -314,11 +315,18 @@ export default {
               position: "top",
             });
           });
+
+        //transaction table
+
+        axios.post("transaction/save", {
+          amount: response.amount,
+          reference_id: response.tx_ref,
+          user_id: this.user._id,
+        });
       }
     },
     closedPaymentModal() {
       window.reload();
-      console.log("closed");
     },
     generateReference() {
       let date = new Date();
