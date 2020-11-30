@@ -230,7 +230,7 @@ export default {
     downloadexcel,
   },
   created() {
-    this.link = `http://localhost:8080/register?ref=${this.user._id}`;
+    this.link = `https://allthingsmore.online/register?ref=${this.user.referral}`;
   },
   methods: {
     async fetchData() {

@@ -8,7 +8,9 @@
       </p>
     </div>
 
-    <label class="input-label" for="fullNameSrEmail">Full name</label>
+    <label class="input-label" for="fullNameSrEmail"
+      >Full name <span class="text-danger">*</span></label
+    >
 
     <!-- Form Group -->
     <div class="form-row">
@@ -28,13 +30,15 @@
       </div>
     </div>
 
-    <label class="input-label" for="fullNameSrEmail">Account Details</label>
+    <label class="input-label" for="fullNameSrEmail"
+      >Account Details<span class="text-danger">*</span></label
+    >
 
     <div class="form-row">
       <div class="col-sm-6">
         <div class="js-form-message form-group">
           <input
-            type="text"
+            type="number"
             :class="{ 'is-invalid': validationStatus($v.account_number) }"
             v-model.trim="$v.account_number.$model"
             class="form-control form-control-lg"
@@ -58,7 +62,9 @@
     </div>
 
     <div class="js-form-message form-group">
-      <label class="input-label" for="signupSrEmail">Your email</label>
+      <label class="input-label" for="signupSrEmail"
+        >Your email<span class="text-danger">*</span></label
+      >
 
       <input
         type="email"
@@ -78,7 +84,9 @@
 
     <!-- Form Group -->
     <div class="js-form-message form-group">
-      <label class="input-label" for="signupSrPassword">Phonenumber</label>
+      <label class="input-label" for="signupSrPassword"
+        >Phonenumber<span class="text-danger">*</span></label
+      >
 
       <div class="input-group input-group-merge">
         <input
@@ -99,12 +107,25 @@
     </div>
     <!-- End Form Group -->
 
+    <!-- Form Group -->
+    <div class="js-form-message form-group">
+      <label class="input-label" for="signupSrPassword">Referral Code</label>
 
+      <div class="input-group input-group-merge">
+        <input
+          type="text"
+          class="js-toggle-password form-control form-control-lg"
+          v-model.trim="referral"
+          :readonly="read"
+        />
+      </div>
+    </div>
+    <!-- End Form Group -->
 
     <!-- Form Group -->
     <div class="js-form-message form-group">
       <label class="input-label" for="signupSrConfirmPassword"
-        >Create a password</label
+        >Create a password<span class="text-danger">*</span></label
       >
 
       <div class="input-group input-group-merge">
@@ -200,11 +221,13 @@ export default {
       phonenumber: "",
       password: "",
       banks: "",
-      code : "",
+      code: "",
       color: "#fff",
       seen: false,
+      referral: "",
       passwordFieldType: "password",
-      isActive : false
+      isActive: false,
+      read: false,
     };
   },
   validations: {
@@ -233,6 +256,10 @@ export default {
   },
   created() {
     this.getBanks();
+    if (this.$route.query.ref) {
+      this.read = true;
+    }
+    this.referral = this.$route.query.ref;
   },
   methods: {
     switchVisibility() {
@@ -270,10 +297,11 @@ export default {
             email: this.email,
             password: this.password,
             bet_limit: 10,
+            referral : this.referral,
             phone_number: this.phonenumber,
             account_number: this.account_number,
             bank_code: this.bank_code,
-            referral_code : this.$route.query.ref
+            referral_code: this.$route.query.ref,
           },
           {
             headers: {
@@ -282,27 +310,33 @@ export default {
           }
         )
         .then((response) => {
-          if (response.data.status == 200) {
+          if (response.status == 201) {
+            console.log(response);
             this.seen = false;
-          }
-           this.$toast.success(`${this.email} registered successfully`, {
-              position: 'top'
+            this.$toast.success(`${this.email} registered successfully`, {
+              position: "top",
             });
-          setTimeout(() => {
-            this.$toast.clear()
-          },2000);
-          setTimeout(() => {
-            this.$router.replace({
-              name : 'Login'
-            })
-          },4000);
+            setTimeout(() => {
+              this.$toast.clear();
+            }, 2000);
+            setTimeout(() => {
+              this.$router.replace({
+                name: "Login",
+              });
+            }, 4000);
+          } else if (response.status == 404){
+            console.log(response);
+            this.$toast.error(`Invalid referral code`, {
+              position: "top",
+            });
+          }
         })
         .catch(() => {
           this.seen = false;
           this.isActive = false;
           this.$toast.error(`User exists", ${this.email} already exists`, {
-              position: 'top'
-            });
+            position: "top",
+          });
         });
     },
   },

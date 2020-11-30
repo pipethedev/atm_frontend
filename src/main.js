@@ -26,6 +26,8 @@ require('@/store/subscriber')
 
 axios.defaults.baseURL = 'https://allthingsmore.herokuapp.com/api/'
 
+//axios.defaults.baseURL = 'http://localhost:5000/api';
+
 Vue.config.productionTip = false
 
 library.add(faPlay, faBell, faHandHoldingUsd, faLock, faArrowLeft, faPen, faFacebook, faTwitter, faLinkedin, faPinterest, faTimes, faBars)
